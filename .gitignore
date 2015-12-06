@@ -1,0 +1,37 @@
+<<<<<<< HEAD
+# Eclipse #
+.settings/
+.metadata/
+.classpath
+.project
+
+# IDEA #
+.idea/
+*iml
+test/
+# Maven #
+target/
+
+# #
+*.class
+
+D:/
+=======
+# Eclipse #
+.settings/
+.metadata/
+.classpath
+.project
+
+# IDEA #
+.idea/
+*iml
+test/
+# Maven #
+target/
+
+# #
+*.class
+
+D:/
+>>>>>>> rename
