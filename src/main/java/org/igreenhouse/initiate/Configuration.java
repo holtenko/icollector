@@ -18,6 +18,8 @@ public class Configuration {
     public static final int UploadDelay;
     public static final int UploadCycle;
     public static final int LogValidity;
+    public static final int ZCNum;
+    public static final int WeatherStationNum;
 
     //进行初始化工作
     static {
@@ -30,5 +32,7 @@ public class Configuration {
         UploadDelay =PropsUtil.getInt(conf, "upload_delay");
         UploadCycle =PropsUtil.getInt(conf, "upload_cycle");
         LogValidity =PropsUtil.getInt(conf, "log_validity");
+        ZCNum =PropsUtil.getInt(conf, "zc_num");
+        WeatherStationNum =PropsUtil.getInt(conf, "weatherstation_num");
     }
 }

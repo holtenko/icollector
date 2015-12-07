@@ -31,13 +31,13 @@ public class Main {
             while (true) {
                 int option = sc.nextInt();
                 if (1 == option) {
-                    String ZCPortName = portList.get(0);
+                    String ZCPortName = portList.get(Configuration.ZCNum);
                     SerialPort ZCPort = SerialPortUtil.openPort(ZCPortName, 115200);
                     ListenerService.addListener(ZCPort, new IndoorListener(ZCPort));
                     System.out.println("Start collect indoor data at " + new Timestamp(System.currentTimeMillis()));
                     break;
                 } else if (2 == option) {
-                    String WeatherStationPortName = portList.get(0);
+                    String WeatherStationPortName = portList.get(Configuration.WeatherStationNum);
                     SerialPort WeatherStationPort = SerialPortUtil.openPort(WeatherStationPortName, 9600);
                     ListenerService.addListener(WeatherStationPort, new OutdoorListener(WeatherStationPort));
                     TimerTask getOutdoorDataTask = new OutdoorSender(WeatherStationPort);
@@ -51,8 +51,8 @@ public class Main {
         } else if (2 == portList.size()) {
             System.out.println("Please make sure ZC connect to the first SerialPort!");
 
-            String ZCPortName = portList.get(0);// 默认把第一个端口打开
-            String WeatherStationPortName = portList.get(1);// 默认把第二个端口打开
+            String ZCPortName = portList.get(Configuration.ZCNum);
+            String WeatherStationPortName = portList.get(Configuration.WeatherStationNum);
             System.out.println("Please ENTER the option:");
             System.out.println("Indoor:  1");
             System.out.println("Outdoor: 2");
