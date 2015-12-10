@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  */
 public class SqlLog {
     private int uid;
+    private String dbname;
     private String sqlstatement;
     private String parameters;
     private Timestamp timestamp;
@@ -18,6 +19,14 @@ public class SqlLog {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public String getDbname() {
+        return dbname;
+    }
+
+    public void setDbname(String dbname) {
+        this.dbname = dbname;
     }
 
     public String getSqlstatement() {

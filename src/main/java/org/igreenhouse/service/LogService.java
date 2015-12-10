@@ -21,6 +21,7 @@ public class LogService {
         for (Object param : params) {
             paramString = paramString + param + ",";
         }
+        sqlLog.setDbname(DBconf.db_name);
         sqlLog.setSqlstatement(sql);
         sqlLog.setParameters(paramString);
         sqlLog.setTimestamp(new Timestamp(System.currentTimeMillis()));
@@ -30,6 +31,7 @@ public class LogService {
 
     public static boolean saveSqlLog(SqlLog data) {
         Map<String, Object> logMap = new HashMap();
+        logMap.put("dbname", data.getDbname());
         logMap.put("sqlstatement", data.getSqlstatement());
         logMap.put("parameters", data.getParameters());
         logMap.put("timestamp", data.getTimestamp());

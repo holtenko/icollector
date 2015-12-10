@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : collector0
+Source Server         : Aliyun
 Source Server Version : 50627
-Source Host           : 192.168.0.137:3306
+Source Host           : 120.55.191.224:3306
 Source Database       : igreenhouse
 
 Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2015-12-04 09:26:18
+Date: 2015-12-10 13:46:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,13 +21,13 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `chemical`;
 CREATE TABLE `chemical` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` tinyint(3) unsigned NOT NULL,
+  `type` tinyint(1) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `brand` varchar(255) DEFAULT NULL,
   `effect` varchar(255) DEFAULT NULL,
-  `available` tinyint(3) unsigned NOT NULL,
+  `available` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of chemical
@@ -40,15 +40,15 @@ DROP TABLE IF EXISTS `device`;
 CREATE TABLE `device` (
   `uid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id` int(10) unsigned NOT NULL,
-  `type` tinyint(3) unsigned NOT NULL,
+  `type` tinyint(1) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `brand` varchar(255) DEFAULT NULL,
   `model` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `available` tinyint(3) unsigned NOT NULL,
+  `available` tinyint(1) unsigned NOT NULL,
   `greenhouse` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of device
@@ -153,6 +153,7 @@ INSERT INTO `device` VALUES ('103', '10200087', '102', '终端87', 'TI', 'CC2530
 INSERT INTO `device` VALUES ('104', '10200088', '102', '终端88', 'TI', 'CC2530', null, '2', '1200240001');
 INSERT INTO `device` VALUES ('105', '10200089', '102', '终端89', 'TI', 'CC2530', null, '2', '1200240001');
 INSERT INTO `device` VALUES ('106', '10300010', '103', '路由器10', 'TI', 'CC2530', null, '2', '1200240001');
+INSERT INTO `device` VALUES ('107', '10500001', '105', '室外气象站1', '智翔宇仪器', 'MULTI-6P', null, '2', '1200240001');
 
 -- ----------------------------
 -- Table structure for `greenhouse`
@@ -161,19 +162,21 @@ DROP TABLE IF EXISTS `greenhouse`;
 CREATE TABLE `greenhouse` (
   `uid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id` int(10) unsigned NOT NULL,
-  `type` tinyint(3) unsigned NOT NULL,
+  `type` tinyint(1) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `location` varchar(255) DEFAULT NULL,
   `gpsinfo` varchar(255) DEFAULT NULL,
-  `dbname` varchar(255) DEFAULT NULL,
-  `available` tinyint(3) unsigned DEFAULT NULL,
+  `dbname` varchar(16) DEFAULT NULL,
+  `available` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of greenhouse
 -- ----------------------------
-INSERT INTO `greenhouse` VALUES ('1', '1200240001', '1', '闵行拱棚', '上海市闵行区东川路800号', '123456789', 'gh1200240001', '1');
+INSERT INTO `greenhouse` VALUES ('1', '1200240001', '1', '成健测试温室', '上海市闵行区', '123456789', 'gh1200240001', '1');
+INSERT INTO `greenhouse` VALUES ('2', '2200240001', '2', '闵行薄膜', '上海市闵行区东川路800号', '4658468489', 'gh2200240001', '2');
+INSERT INTO `greenhouse` VALUES ('3', '1200240002', '1', '实验室测试温室', '上海市闵行区东川路800号', '979822', 'gh1200240002', '1');
 
 -- ----------------------------
 -- Table structure for `variety`
@@ -183,11 +186,21 @@ CREATE TABLE `variety` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `brand` varchar(32) DEFAULT NULL,
-  `unit` varchar(16) DEFAULT NULL,
-  `available` tinyint(3) unsigned NOT NULL,
+  `unit` varchar(8) DEFAULT NULL,
+  `available` tinyint(1) unsigned NOT NULL,
+  `airtemp` varchar(64) DEFAULT NULL,
+  `airhum` varchar(64) DEFAULT NULL,
+  `soiltemp` varchar(64) DEFAULT NULL,
+  `soilhum` varchar(64) DEFAULT NULL,
+  `light` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of variety
 -- ----------------------------
+INSERT INTO `variety` VALUES ('1', '西瓜', '洪兴', '株', '1', '5,15,30,35', '5,15,30,35', '5,15,30,35', '5,15,30,35', '500,1500,2500,3000');
+INSERT INTO `variety` VALUES ('2', '番茄', '东星', '株', '1', '5,15,30,35', '5,15,30,35', '5,15,30,35', '5,15,30,35', '500,1500,2500,3000');
+INSERT INTO `variety` VALUES ('3', '甜瓜', '三联帮', '株', '1', '5,15,30,35', '5,15,30,35', '5,15,30,35', '5,15,30,35', '500,1500,2500,3000');
+INSERT INTO `variety` VALUES ('4', '草莓', '山口组', '株', '1', '5,15,30,35', '5,15,30,35', '5,15,30,35', '5,15,30,35', '500,1500,2500,3000');
+INSERT INTO `variety` VALUES ('5', '茄子', '洪兴', '株', '1', '5,15,30,35', '5,15,30,35', '5,15,30,35', '5,15,30,35', '500,1500,2500,3000');

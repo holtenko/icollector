@@ -2,8 +2,6 @@ package org.igreenhouse.service;
 
 import org.igreenhouse.domain.SqlLog;
 import org.igreenhouse.helper.CloudDBHelper;
-import org.igreenhouse.helper.DatabaseHelper;
-import org.igreenhouse.helper.LogDBHelper;
 import org.igreenhouse.initiate.Configuration;
 
 import java.sql.Timestamp;
@@ -22,7 +20,7 @@ public class UploadService {
     private static void clearSqlLog(int failnum, SqlLog log) {
         //同步全部成功，且日志总数大于日志有效数目，则清空日志表
         if (0 == failnum & log.getUid() > Configuration.LogValidity) {
-            LogDBHelper.truncateTable("sqllog");
+            LogService.truncateSqlLog();
             System.out.println("Clear Log at " + new Timestamp(System.currentTimeMillis()));
         }
     }
