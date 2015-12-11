@@ -21,10 +21,11 @@ import java.util.TimerTask;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Current Local Database:"+ DBconf.db_name     +" User:"+DBconf.db_username     +" URL:"+DBconf.db_url);
-        System.out.println("Current Cloud Database:"+ DBconf.clouddb_name+" User:"+DBconf.clouddb_username+" URL:"+DBconf.clouddb_url);
+        System.out.println("Current Local Database:" + DBconf.db_name + " User:" + DBconf.db_username + " URL:" + DBconf.db_url);
+        System.out.println("Current Cloud Database:" + DBconf.clouddb_name + " User:" + DBconf.clouddb_username + " URL:" + DBconf.clouddb_url);
 
         ArrayList<String> portList = SerialPortUtil.findPort();
+        System.out.println("There is " + portList.size() + "device connected.");
         if (0 == portList.size()) {//没识别到串口的情况
             System.out.println("ERROR:No SerialPort Detected,Please check!");
             System.exit(0);
