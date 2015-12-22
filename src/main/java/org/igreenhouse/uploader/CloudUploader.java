@@ -1,9 +1,8 @@
 package org.igreenhouse.uploader;
 
-import org.igreenhouse.service.DataInService;
-import org.igreenhouse.service.DataOutService;
-import org.igreenhouse.service.DataProcessService;
-import org.igreenhouse.service.UploadService;
+import org.igreenhouse.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.util.TimerTask;
@@ -13,6 +12,7 @@ import java.util.TimerTask;
  * 发送室外数据采集命令相关的类
  */
 public class CloudUploader extends TimerTask {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListenerService.class);
 
     @Override
     public void run() {
@@ -20,7 +20,7 @@ public class CloudUploader extends TimerTask {
         if (0 == uploadinfo[1]) {
             System.out.println("Upload " + uploadinfo[0] + " records successfully at " + new Timestamp(System.currentTimeMillis()));
         } else {
-            System.out.println("WARNING: Upload " + uploadinfo[1] + " records failure at " + new Timestamp(System.currentTimeMillis()));
+            LOGGER.error("WARNING: Upload " + uploadinfo[1] + " records failure ");
         }
     }
 }

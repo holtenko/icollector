@@ -3,6 +3,8 @@ package org.igreenhouse.service;
 import org.igreenhouse.domain.SqlLog;
 import org.igreenhouse.helper.CloudDBHelper;
 import org.igreenhouse.initiate.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
  * Created by AllenKO on 2015/12/3.
  */
 public class UploadService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListenerService.class);
+
     private static boolean saveLogToCloud(SqlLog log) {
         String sql = log.getSqlstatement();
         Object[] params = log.getParameters().split(",");
@@ -21,7 +25,7 @@ public class UploadService {
         //同步全部成功，且日志总数大于日志有效数目，则清空日志表
         if (0 == failnum & log.getUid() > Configuration.LogValidity) {
             LogService.truncateSqlLog();
-            System.out.println("Clear Log at " + new Timestamp(System.currentTimeMillis()));
+            LOGGER.error("Clear Log ");
         }
     }
 
@@ -39,7 +43,7 @@ public class UploadService {
                         LogService.setLogStatus(log.getUid());
                     } else {
                         uploadinfo[1]++;
-                        System.out.println("Upload " + log.getUid() + " to Cloud Failure.");
+                        LOGGER.error("Upload " + log.getUid() + " to Cloud Failure.");
                     }
                 }
             }

@@ -47,7 +47,6 @@ public class ListenerService {
         port.removeEventListener();
 
         SerialPortUtil.closePort(port);
-
-        System.out.println("Remove listener of "+port.getName()+" sucessfully !");
+        LOGGER.error("Remove listener of "+port.getName()+" sucessfully !");
     }
 }

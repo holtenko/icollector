@@ -7,6 +7,7 @@ import gnu.io.SerialPortEventListener;
 import org.igreenhouse.domain.DataIn;
 import org.igreenhouse.sender.IndoorSender;
 import org.igreenhouse.service.DataInService;
+import org.igreenhouse.service.DeviceService;
 import org.igreenhouse.util.SerialPortUtil;
 import org.igreenhouse.util.SplitUtil;
 import org.slf4j.Logger;
@@ -75,6 +76,7 @@ public class IndoorListener implements SerialPortEventListener {
                         DataIn dataIn = DataInService.parseDataIn(indoorBytes[i]);
                         if (DataInService.saveDataIn(dataIn)) {
                             System.out.println("Insert indoor data into database successfully at " + new Timestamp(System.currentTimeMillis()));
+                            DeviceService.saveDeviceStatus(dataIn);
                         } else {
                             LOGGER.error("Insert indoor data into database failed !");
                         }

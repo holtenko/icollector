@@ -35,8 +35,9 @@ public class DataInService {
         float soiltemp = Float.parseFloat(new String(dataInBytes, 7 + 5 * 2, 5));
         float soilhum = Float.parseFloat(new String(dataInBytes, 7 + 5 * 3, 5));
         float light = Float.parseFloat(new String(dataInBytes, 7 + 5 * 4, 5));
+        byte status = dataInBytes[5];
 
-        DataIn dataIn = new DataIn(timestamp,0,0,0,0,0,0);
+        DataIn dataIn = new DataIn(timestamp, 0, 0, 0, 0, 0, 0);
         dataIn.setDeviceid(deviceId);
         dataIn.setTimestamp(timestamp);
         dataIn.setAirtemp(airtemp);
@@ -44,6 +45,7 @@ public class DataInService {
         dataIn.setSoiltemp(soiltemp);
         dataIn.setSoilhum(soilhum);
         dataIn.setLight(light);
+        dataIn.setStatus(status);
         return dataIn;
     }
 

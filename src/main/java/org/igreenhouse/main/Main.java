@@ -25,7 +25,7 @@ public class Main {
         System.out.println("Current Cloud Database:" + DBconf.clouddb_name + " User:" + DBconf.clouddb_username + " URL:" + DBconf.clouddb_url);
 
         ArrayList<String> portList = SerialPortUtil.findPort();
-        System.out.println("There is " + portList.size() + "device connected.");
+        System.out.println("There is " + portList.size() + " device connected.");
         if (0 == portList.size()) {//没识别到串口的情况
             System.out.println("ERROR:No SerialPort Detected,Please check!");
             System.exit(0);
@@ -65,8 +65,6 @@ public class Main {
                 }
             }
         } else {//识别两个及以上串口的情况
-            System.out.println("Please make sure ZC connect to the first SerialPort!");
-
             String ZCPortName = portList.get(Configuration.ZCNum);
             String WeatherStationPortName = portList.get(Configuration.WeatherStationNum);
             System.out.println("Please ENTER the option:");

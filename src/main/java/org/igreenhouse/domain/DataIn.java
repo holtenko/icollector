@@ -27,6 +27,7 @@ public class DataIn {
     private float soiltemp;
     private float soilhum;
     private float light;
+    private byte status;
 
     public Timestamp getTimestamp() {
         return timestamp;
@@ -82,5 +83,13 @@ public class DataIn {
 
     public void setLight(float light) {
         this.light = light;
+    }
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
     }
 }
