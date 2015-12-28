@@ -11,7 +11,7 @@ import java.util.TimerTask;
  * Created by AllenKO on 2015/10/30.
  * 发送室外数据采集命令相关的类
  */
-public class IndoorAverageSender extends TimerTask {
+public class IndoorAverageSender implements Runnable {
     /**
      * 向串口发送获取室外数据命令
      */

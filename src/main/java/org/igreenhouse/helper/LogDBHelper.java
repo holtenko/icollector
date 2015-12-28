@@ -51,7 +51,6 @@ public class LogDBHelper {
                 System.out.println("Connect to " + DATA_SOURCE.getUrl() + " successfully");
             } catch (SQLException e) {
                 LOGGER.error("Get connection to " + DATA_SOURCE.getUrl() + " failure", e);
-                throw new RuntimeException(e);
             } finally {
                 CONNECTION_HOLDER.set(conn);
             }
@@ -73,7 +72,6 @@ public class LogDBHelper {
             rows = QUERY_RUNNER.update(conn, sql, params);
         } catch (SQLException e) {
             LOGGER.error("execute update/insert/delete failure", e);
-            throw new RuntimeException(e);
         }
         return rows;
     }
@@ -82,7 +80,7 @@ public class LogDBHelper {
      * 清空表
      */
     public static void truncateTable(String tablename) {
-        String sql = "TRUNCATE TABLE "+tablename;
+        String sql = "TRUNCATE TABLE " + tablename;
         executeUpdate(sql);
     }
 
@@ -154,13 +152,12 @@ public class LogDBHelper {
      * @return
      */
     public static <T> List<T> queryEntityList(Class<T> entityClass, String sql, Object... params) {
-        List<T> entityList;
+        List<T> entityList = null;
         try {
             Connection conn = getConnection();
             entityList = QUERY_RUNNER.query(conn, sql, new BeanListHandler<T>(entityClass), params);
         } catch (SQLException e) {
             LOGGER.error("Query entity list failure!", e);
-            throw new RuntimeException(e);
         }
         return entityList;
     }

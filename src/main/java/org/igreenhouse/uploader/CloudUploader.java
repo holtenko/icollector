@@ -11,8 +11,8 @@ import java.util.TimerTask;
  * Created by AllenKO on 2015/10/30.
  * 发送室外数据采集命令相关的类
  */
-public class CloudUploader extends TimerTask {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ListenerService.class);
+public class CloudUploader implements Runnable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CloudUploader.class);
 
     @Override
     public void run() {

@@ -49,10 +49,9 @@ public class DatabaseHelper {
         if (conn == null) {
             try {
                 conn = DATA_SOURCE.getConnection();
-                System.out.println("Connect to "+DATA_SOURCE.getUrl()+" successfully");
+                System.out.println("Connect to " + DATA_SOURCE.getUrl() + " successfully");
             } catch (SQLException e) {
                 LOGGER.error("Get connection to database failure", e);
-                throw new RuntimeException(e);
             } finally {
                 CONNECTION_HOLDER.set(conn);
             }
@@ -73,10 +72,9 @@ public class DatabaseHelper {
             Connection conn = getConnection();
             rows = QUERY_RUNNER.update(conn, sql, params);
             //保存数据库操作日志
-            LogService.saveSqlLog(LogService.generateSqlLog(sql,params));
+            LogService.saveSqlLog(LogService.generateSqlLog(sql, params));
         } catch (SQLException e) {
             LOGGER.error("execute update/insert/delete failure", e);
-            throw new RuntimeException(e);
         }
         return rows;
     }
@@ -111,6 +109,7 @@ public class DatabaseHelper {
 
     /**
      * 更新
+     *
      * @param entityClass
      * @param id
      * @param fieldMap
@@ -139,6 +138,7 @@ public class DatabaseHelper {
 
     /**
      * 删除
+     *
      * @param entityClass
      * @param id
      * @param <T>
@@ -160,13 +160,12 @@ public class DatabaseHelper {
      * @return
      */
     public static <T> T queryEntity(Class<T> entityClass, String sql, Object... params) {
-        T entity;
+        T entity = null;
         try {
             Connection conn = getConnection();
             entity = QUERY_RUNNER.query(conn, sql, new BeanHandler<T>(entityClass), params);
         } catch (SQLException e) {
             LOGGER.error("Query entity failure!", e);
-            throw new RuntimeException(e);
         }
         return entity;
     }
@@ -181,13 +180,12 @@ public class DatabaseHelper {
      * @return
      */
     public static <T> List<T> queryEntityList(Class<T> entityClass, String sql, Object... params) {
-        List<T> entityList;
+        List<T> entityList = null;
         try {
             Connection conn = getConnection();
             entityList = QUERY_RUNNER.query(conn, sql, new BeanListHandler<T>(entityClass), params);
         } catch (SQLException e) {
             LOGGER.error("Query entity list failure!", e);
-            throw new RuntimeException(e);
         }
         return entityList;
     }

@@ -49,7 +49,6 @@ public class CloudDBHelper {
                 System.out.println("Connect to "+DATA_SOURCE.getUrl()+" successfully");
             } catch (SQLException e) {
                 LOGGER.error("Get connection to "+DATA_SOURCE.getUrl()+" failure", e);
-                throw new RuntimeException(e);
             } finally {
                 CONNECTION_HOLDER.set(conn);
             }
@@ -71,7 +70,6 @@ public class CloudDBHelper {
             rows = QUERY_RUNNER.update(conn, sql, params);
         } catch (SQLException e) {
             LOGGER.error("execute update/insert/delete failure", e);
-            throw new RuntimeException(e);
         }
         return rows;
     }

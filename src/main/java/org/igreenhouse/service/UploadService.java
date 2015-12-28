@@ -43,7 +43,7 @@ public class UploadService {
                         LogService.setLogStatus(log.getUid());
                     } else {
                         uploadinfo[1]++;
-                        LOGGER.error("Upload " + log.getUid() + " to Cloud Failure.");
+                        LOGGER.error("Upload record:" + log.getUid() + " to Cloud Failure.");
                     }
                 }
             }

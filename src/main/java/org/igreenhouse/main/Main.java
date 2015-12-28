@@ -15,8 +15,8 @@ import org.igreenhouse.util.SerialPortUtil;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -26,6 +26,9 @@ public class Main {
 
         ArrayList<String> portList = SerialPortUtil.findPort();
         System.out.println("There is " + portList.size() + " device connected.");
+
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
+
         if (0 == portList.size()) {//没识别到串口的情况
             System.out.println("ERROR:No SerialPort Detected,Please check!");
             System.exit(0);
@@ -42,23 +45,22 @@ public class Main {
                     SerialPort ZCPort = SerialPortUtil.openPort(ZCPortName, 115200);
                     ListenerService.addListener(ZCPort, new IndoorListener(ZCPort));
                     System.out.println("Start collect indoor data at " + new Timestamp(System.currentTimeMillis()));
+
                     //开启平均室内数据的定时任务
-                    TimerTask indoorAverageSender = new IndoorAverageSender();
-                    Timer getIndoorAverageDataCycle = new Timer(true);
-                    getIndoorAverageDataCycle.scheduleAtFixedRate(indoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle);
+                    IndoorAverageSender indoorAverageSender = new IndoorAverageSender();
+                    executor.scheduleAtFixedRate(indoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle, TimeUnit.SECONDS);
                     break;
                 } else if (2 == option) {
                     String WeatherStationPortName = portList.get(Configuration.WeatherStationNum);
                     SerialPort WeatherStationPort = SerialPortUtil.openPort(WeatherStationPortName, 9600);
                     ListenerService.addListener(WeatherStationPort, new OutdoorListener(WeatherStationPort));
+
                     //开启获取室外数据的定时任务
-                    TimerTask getOutdoorDataTask = new OutdoorSender(WeatherStationPort);
-                    Timer getOutdoorCycle = new Timer(true);
-                    getOutdoorCycle.scheduleAtFixedRate(getOutdoorDataTask, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle);
+                    OutdoorSender outdoorSender = new OutdoorSender(WeatherStationPort);
+                    executor.scheduleAtFixedRate(outdoorSender, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle, TimeUnit.SECONDS);
                     //开启平均室外数据的定时任务
-                    TimerTask outdoorAverageSender = new OutdoorAverageSender();
-                    Timer getOutdoorAverageDataCycle = new Timer(true);
-                    getOutdoorAverageDataCycle.scheduleAtFixedRate(outdoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle);
+                    OutdoorAverageSender outdoorAverageSender = new OutdoorAverageSender();
+                    executor.scheduleAtFixedRate(outdoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle, TimeUnit.SECONDS);
                     break;
                 } else {
                     System.out.println("ERROR: ENTER corrected option:");
@@ -79,41 +81,35 @@ public class Main {
                     ListenerService.addListener(ZCPort, new IndoorListener(ZCPort));
                     System.out.println("Start collect indoor data at " + new Timestamp(System.currentTimeMillis()));
                     //开启平均室内数据的定时任务
-                    TimerTask indoorAverageSender = new IndoorAverageSender();
-                    Timer getIndoorAverageDataCycle = new Timer(true);
-                    getIndoorAverageDataCycle.scheduleAtFixedRate(indoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle);
-
+                    IndoorAverageSender indoorAverageSender = new IndoorAverageSender();
+                    executor.scheduleAtFixedRate(indoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle, TimeUnit.SECONDS);
                     break;
                 } else if (2 == option) {
                     SerialPort WeatherStationPort = SerialPortUtil.openPort(WeatherStationPortName, 9600);//打开串口
                     ListenerService.addListener(WeatherStationPort, new OutdoorListener(WeatherStationPort));//添加监听器
                     //开启获取室外数据的定时任务
-                    TimerTask getOutdoorDataTask = new OutdoorSender(WeatherStationPort);
-                    Timer getOutdoorCycle = new Timer(true);
-                    getOutdoorCycle.scheduleAtFixedRate(getOutdoorDataTask, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle);
+                    OutdoorSender outdoorSender = new OutdoorSender(WeatherStationPort);
+                    executor.scheduleAtFixedRate(outdoorSender, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle, TimeUnit.SECONDS);
                     //开启平均室外数据的定时任务
-                    TimerTask outdoorAverageSender = new OutdoorAverageSender();
-                    Timer getOutdoorAverageDataCycle = new Timer(true);
-                    getOutdoorAverageDataCycle.scheduleAtFixedRate(outdoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle);
-
+                    OutdoorAverageSender outdoorAverageSender = new OutdoorAverageSender();
+                    executor.scheduleAtFixedRate(outdoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle, TimeUnit.SECONDS);
                     break;
                 } else if (3 == option) {
                     SerialPort ZCPort = SerialPortUtil.openPort(ZCPortName, 115200);
                     ListenerService.addListener(ZCPort, new IndoorListener(ZCPort));
                     SerialPort WeatherStationPort = SerialPortUtil.openPort(WeatherStationPortName, 9600);
                     ListenerService.addListener(WeatherStationPort, new OutdoorListener(WeatherStationPort));
-                    TimerTask getOutdoorDataTask = new OutdoorSender(WeatherStationPort);
-                    Timer getOutdoorCycle = new Timer(true);
-                    getOutdoorCycle.scheduleAtFixedRate(getOutdoorDataTask, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle);
+
+                    //开启获取室外数据的定时任务
+                    OutdoorSender outdoorSender = new OutdoorSender(WeatherStationPort);
+                    executor.scheduleAtFixedRate(outdoorSender, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle, TimeUnit.SECONDS);
                     System.out.println("Start collect all data at " + new Timestamp(System.currentTimeMillis()));
                     //开启平均室内数据的定时任务
-                    TimerTask indoorAverageSender = new IndoorAverageSender();
-                    Timer getIndoorAverageDataCycle = new Timer(true);
-                    getIndoorAverageDataCycle.scheduleAtFixedRate(indoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle);
+                    IndoorAverageSender indoorAverageSender = new IndoorAverageSender();
+                    executor.scheduleAtFixedRate(indoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle, TimeUnit.SECONDS);
                     //开启平均室外数据的定时任务
-                    TimerTask outdoorAverageSender = new OutdoorAverageSender();
-                    Timer getOutdoorAverageDataCycle = new Timer(true);
-                    getOutdoorAverageDataCycle.scheduleAtFixedRate(outdoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle);
+                    OutdoorAverageSender outdoorAverageSender = new OutdoorAverageSender();
+                    executor.scheduleAtFixedRate(outdoorAverageSender, Configuration.AverageAcqDelay, Configuration.AverageAcqCycle, TimeUnit.SECONDS);
                     break;
                 } else {
                     System.out.println("ERROR: ENTER corrected option:");
@@ -121,8 +117,7 @@ public class Main {
             }
         }
         //开启上传定时任务
-        TimerTask uploadTask = new CloudUploader();
-        Timer uploadCycle = new Timer(true);
-        uploadCycle.scheduleAtFixedRate(uploadTask, Configuration.UploadDelay, Configuration.UploadCycle);
+        CloudUploader cloudUploader = new CloudUploader();
+        executor.scheduleAtFixedRate(cloudUploader, Configuration.UploadDelay, Configuration.UploadCycle, TimeUnit.SECONDS);
     }
 }
