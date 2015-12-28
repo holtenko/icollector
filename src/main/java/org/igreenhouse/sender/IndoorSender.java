@@ -27,7 +27,7 @@ public class IndoorSender {
      */
     private final void getIndoorData() {
         serialPortUtil.sendToPort(serialPort, ACQORDER);
-        System.out.println("Send getIndoorData command sucessfully at "+ new Timestamp(System.currentTimeMillis()));
+        System.out.println("Send getIndoorData command sucessfully at " + new Timestamp(System.currentTimeMillis()));
     }
 
     /**
@@ -39,6 +39,12 @@ public class IndoorSender {
     public final boolean isDataReady(byte[] tips) {
         boolean isReady = Arrays.equals(tips, ACQTIPS);
         if (isReady) {
+            //数据到达时延迟5s缓存数据
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             getIndoorData();
         }
         return !isReady;
