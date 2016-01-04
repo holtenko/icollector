@@ -35,8 +35,8 @@ public class DataOutService {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         float windspeed = Float.parseFloat(otherFive[0]);
         float winddirect = Float.parseFloat(otherFive[1]);
-        float airtemp = Float.parseFloat(otherFive[2]);
-        float airhum = Float.parseFloat(otherFive[3]);
+        float airhum = Float.parseFloat(otherFive[2]);
+        float airtemp = Float.parseFloat(otherFive[3]);
         float atmosphere = Float.parseFloat(otherFive[4]);
         float rainfall = Float.parseFloat(ByteUtil.bytesToString(rainfallBytes));
 
