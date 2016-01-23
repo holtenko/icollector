@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class DataProcessService {
     public static Indoor indoorDataProcess() {
-        String sql = "SELECT * FROM datain ORDER BY uid DESC LIMIT 10";
+        String sql = "SELECT * FROM datain ORDER BY uid DESC LIMIT 3";
         List<DataIn> dataIn = DatabaseHelper.queryEntityList(DataIn.class, sql);
-        if(0==dataIn.size()){
+        if (0 == dataIn.size()) {
             return new Indoor(new Timestamp(0), 0, 0, 0, 0, 0);
         }
         float[] total = new float[5];
@@ -36,10 +36,10 @@ public class DataProcessService {
     }
 
     public static Outdoor outdoorDataProcess() {
-        String sql = "SELECT * FROM dataout ORDER BY uid DESC LIMIT 10";
+        String sql = "SELECT * FROM dataout ORDER BY uid DESC LIMIT 1";
         List<DataOut> dataOut = DatabaseHelper.queryEntityList(DataOut.class, sql);
-        if(0==dataOut.size()){
-            return new Outdoor(new Timestamp(0), 0, 0, 0, 0, 0,0);
+        if (0 == dataOut.size()) {
+            return new Outdoor(new Timestamp(0), 0, 0, 0, 0, 0, 0);
         }
         float[] total = new float[6];
         float[] average = new float[total.length];

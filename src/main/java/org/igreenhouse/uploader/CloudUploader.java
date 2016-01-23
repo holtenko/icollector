@@ -16,11 +16,12 @@ public class CloudUploader implements Runnable {
 
     @Override
     public void run() {
-        int[] uploadinfo = UploadService.uploadToCloud();
-        if (0 == uploadinfo[1]) {
-            System.out.println("Upload " + uploadinfo[0] + " records successfully at " + new Timestamp(System.currentTimeMillis()));
+        int[] uploadInfo = UploadService.uploadToCloud();
+        int fallNum = uploadInfo[0] - uploadInfo[1];//上传失败的记录的数量
+        if (0 == fallNum) {
+            System.out.println("Upload " + uploadInfo[0] + " records successfully at " + new Timestamp(System.currentTimeMillis()));
         } else {
-            LOGGER.error("WARNING: Upload " + uploadinfo[1] + " records failure ");
+            LOGGER.error("WARNING: Upload " + fallNum + " records failure ");
         }
     }
 }

@@ -31,24 +31,26 @@ public class UploadService {
 
     public static int[] uploadToCloud() {
         List<SqlLog> unsyncLog = LogService.getUnsyncLog();
-        int[] uploadinfo = new int[2];//第一位为总数，第二位为上传失败的数量
-        uploadinfo[0] = unsyncLog.size();
+        int[] uploadInfo = new int[2];//第一位为总数，第二位为上传成功的数量
+        uploadInfo[0] = unsyncLog.size();
         //如果未同步SQL列表不为空，则进行同步
-        if (0 != uploadinfo[0]) {
+        if (0 != uploadInfo[0]) {
             for (SqlLog log : unsyncLog) {
                 if (saveLogToCloud(log)) {
                     LogService.setLogStatus(log.getUid());
+                    uploadInfo[1]++;
                 } else {
                     if (saveLogToCloud(log)) {
                         LogService.setLogStatus(log.getUid());
+                        uploadInfo[1]++;
                     } else {
-                        uploadinfo[1]++;
-                        LOGGER.error("Upload record:" + log.getUid() + " to Cloud Failure.");
+                        LOGGER.error("Upload record to Cloud Failure.");
+                        break;//上传失败后停止上传，等待下一次上传
                     }
                 }
             }
-            clearSqlLog(uploadinfo[1], unsyncLog.get(0));
+            clearSqlLog(uploadInfo[0] - uploadInfo[1], unsyncLog.get(0));
         }
-        return uploadinfo;
+        return uploadInfo;
     }
 }

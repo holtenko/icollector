@@ -27,7 +27,7 @@ public class LogDBHelper {
 
     //进行初始化工作
     static {
-        CONNECTION_HOLDER = new ThreadLocal<Connection>();
+        CONNECTION_HOLDER = new ThreadLocal<>();
         QUERY_RUNNER = new QueryRunner();
 
         //配置数据库连接池

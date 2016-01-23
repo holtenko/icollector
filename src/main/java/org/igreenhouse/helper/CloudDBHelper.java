@@ -25,7 +25,7 @@ public class CloudDBHelper {
 
     //进行初始化工作
     static {
-        CONNECTION_HOLDER = new ThreadLocal<Connection>();
+        CONNECTION_HOLDER = new ThreadLocal<>();
         QUERY_RUNNER = new QueryRunner();
 
         //配置数据库连接池
@@ -43,15 +43,15 @@ public class CloudDBHelper {
      */
     private static Connection getConnection() {
         Connection conn = CONNECTION_HOLDER.get();
-        if (conn == null) {
-            try {
+        try {
+            if (conn == null || conn.isClosed()) {
                 conn = DATA_SOURCE.getConnection();
-                System.out.println("Connect to "+DATA_SOURCE.getUrl()+" successfully");
-            } catch (SQLException e) {
-                LOGGER.error("Get connection to "+DATA_SOURCE.getUrl()+" failure", e);
-            } finally {
-                CONNECTION_HOLDER.set(conn);
+                System.out.println("Connect to " + DATA_SOURCE.getUrl() + " successfully");
             }
+        } catch (SQLException e) {
+            LOGGER.error("Get connection to " + DATA_SOURCE.getUrl() + " failure", e);
+        } finally {
+            CONNECTION_HOLDER.set(conn);
         }
         return conn;
     }
