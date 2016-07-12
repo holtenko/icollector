@@ -1,7 +1,7 @@
 package org.igreenhouse.util;
 
 /**
- * Created by AllenKO on 2015/10/30.
+ * Created by holten on 2015/10/30.
  * 操作字节相关的类
  */
 public class ByteUtil {

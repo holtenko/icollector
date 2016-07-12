@@ -1,6 +1,6 @@
 package org.igreenhouse.main;
 
-import org.igreenhouse.service.ReadData;
+import org.igreenhouse.service.ReadDataService;
 import org.igreenhouse.views.MainForm;
 
 import javax.swing.*;
@@ -12,13 +12,11 @@ import java.util.concurrent.LinkedBlockingDeque;
  */
 public class Main {
     public static void main(String[] args) {
-        BlockingQueue queue = new LinkedBlockingDeque();
         JFrame frame = new JFrame("MainForm");
-        MainForm mainForm = new MainForm(queue);
+        MainForm mainForm = new MainForm();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setContentPane(mainForm.getMainPanel());
-        new Thread(new ReadData(queue)).start();
     }
 }
