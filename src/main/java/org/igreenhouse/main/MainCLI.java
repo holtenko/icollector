@@ -1,6 +1,6 @@
 package org.igreenhouse.main;
 
-import org.igreenhouse.config.Init;
+import org.igreenhouse.config.Configuration;
 import org.igreenhouse.service.SampleDataService;
 import org.igreenhouse.threads.ReadDataFromQueueThread;
 import org.igreenhouse.threads.SendOrderThread;
@@ -39,6 +39,6 @@ public class MainCLI {
 
         //开启获取室外数据的定时任务
         SendOrderThread sendOrderThread=new SendOrderThread(WeatherStationPortName,9600);
-        executor.scheduleAtFixedRate(sendOrderThread, Init.OutdoorAcqDelay, Init.OutdoorAcqCycle, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(sendOrderThread, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle, TimeUnit.SECONDS);
 	}
 }

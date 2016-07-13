@@ -9,7 +9,7 @@ import java.util.Properties;
 
 
 
-public class Init {
+public class Configuration {
     //加载设备配置文件
     private static final Properties conf = PropsUtil.loadProps("conf.properties");
     public static final int WeatherStationID;
