@@ -1,12 +1,19 @@
 package org.igreenhouse.service;
 
+import org.igreenhouse.dao.DataIn;
+import org.igreenhouse.dao.DataOut;
+
 /**
  * Created by holten on 2015/11/3. 用于解析数据的类
  */
 public class ParseDataService {
-	public static final int parseDataIn(byte[] dataInBytes) {
-		int serialIdBytes = dataInBytes[1];// 建立设备串口id字节数组
+	public static DataIn parseDataInPackage(byte[] dataPackage) {
+		int serialIdBytes = dataPackage[1];// 建立设备串口id字节数组
 		int serialId = (serialIdBytes / 16 * 10) + (serialIdBytes % 16);
-		return serialId;
+		return null;
+	}
+
+	public static DataOut parseDataOutPackage(byte[] dataPackage) {
+		return null;
 	}
 }

@@ -1,4 +1,4 @@
-package org.igreenhouse.listener;
+package org.igreenhouse.comm;
 
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
