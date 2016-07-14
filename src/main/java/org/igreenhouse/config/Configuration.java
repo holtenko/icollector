@@ -12,6 +12,8 @@ import java.util.Properties;
 public class Configuration {
     //加载设备配置文件
     private static final Properties conf = PropsUtil.loadProps("conf.properties");
+    private static final Properties dbconf = PropsUtil.loadProps("dbconfig.properties");
+
     public static final int WeatherStationID;
     public static final int OutdoorAcqDelay;
     public static final int OutdoorAcqCycle;
@@ -20,6 +22,18 @@ public class Configuration {
 
     public static final int ZCNum;
     public static final int WeatherStationNum;
+
+
+    public static final String db_driver;
+    public static final String db_name;
+    public static final String db_url;
+    public static final String db_username;
+    public static final String db_password;
+
+    public static final String clouddb_name;
+    public static final String clouddb_url;
+    public static final String clouddb_username;
+    public static final String clouddb_password;
 
     //进行初始化工作
     static {
@@ -31,5 +45,16 @@ public class Configuration {
         AverageAcqCycle =PropsUtil.getInt(conf, "average_acq_cycle");
         ZCNum =PropsUtil.getInt(conf, "zc_num");
         WeatherStationNum =PropsUtil.getInt(conf, "weatherstation_num");
+
+        // 数据库相关属性
+        db_driver = PropsUtil.getString(dbconf, "driver");
+        db_name = PropsUtil.getString(dbconf, "dbname");
+        db_url = PropsUtil.getString(dbconf, "url") + db_name;
+        db_username = PropsUtil.getString(dbconf, "user");
+        db_password = PropsUtil.getString(dbconf, "password");
+        clouddb_name = PropsUtil.getString(dbconf, "clouddbname");
+        clouddb_url = PropsUtil.getString(dbconf, "cloudurl") + clouddb_name;
+        clouddb_username = PropsUtil.getString(dbconf, "clouduser");
+        clouddb_password = PropsUtil.getString(dbconf, "cloudpassword");
     }
 }
