@@ -2,6 +2,7 @@ package org.igreenhouse.main;
 
 import org.igreenhouse.config.Configuration;
 import org.igreenhouse.service.SampleDataService;
+import org.igreenhouse.threads.ParseAndSaveDataThread;
 import org.igreenhouse.threads.ReadDataFromQueueThread;
 import org.igreenhouse.threads.SendOrderThread;
 
@@ -17,7 +18,7 @@ public class MainCLI {
 	public static void main(String[] args) {
 		SampleDataService sampleDataService = new SampleDataService();
 
-        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
+		ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
 
 		String ZCPortName = "";
 		String WeatherStationPortName = "";
@@ -27,18 +28,20 @@ public class MainCLI {
 		BlockingQueue dataInPackages = new LinkedBlockingQueue();
 		BlockingQueue dataOutPackages = new LinkedBlockingQueue();
 
-        //开启监听器开始采集数据
+		// 开启监听器开始采集数据
 		sampleDataService.sampleData(ZCPortName, 115200, dataInBytes);
 		sampleDataService.sampleData(WeatherStationPortName, 9600, dataOutBytes);
 
-        //开始从字节流队列封装数据包到数据包队列
+		// 开始从字节流队列封装数据包到数据包队列
 		new Thread(new ReadDataFromQueueThread(dataInBytes, dataInPackages, (byte) 58, (byte) 239)).start();
 		new Thread(new ReadDataFromQueueThread(dataOutBytes, dataOutPackages, (byte) 58, (byte) 239)).start();
 
+		// 开始从数据包队列解析并保存数据到数据库
+		new Thread(new ParseAndSaveDataThread(dataInPackages, 0)).start();
+		new Thread(new ParseAndSaveDataThread(dataOutPackages, 1)).start();
 
-
-        //开启获取室外数据的定时任务
-        SendOrderThread sendOrderThread=new SendOrderThread(WeatherStationPortName,9600);
-        executor.scheduleAtFixedRate(sendOrderThread, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle, TimeUnit.SECONDS);
+		// 开启获取室外数据的定时任务
+		SendOrderThread sendOrderThread = new SendOrderThread(WeatherStationPortName, 9600);
+		executor.scheduleAtFixedRate(sendOrderThread, Configuration.OutdoorAcqDelay, Configuration.OutdoorAcqCycle, TimeUnit.SECONDS);
 	}
 }

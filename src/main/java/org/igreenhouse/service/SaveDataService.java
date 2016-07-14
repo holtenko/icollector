@@ -23,7 +23,7 @@ public class SaveDataService {
         dataMap.put("light", data.getLight());
         return DataBaseHelper.insertEntity(DataIn.class, dataMap);
     }
-    
+
     public static boolean saveDataOut(DataOut data) {
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("deviceid", data.getDeviceid());
