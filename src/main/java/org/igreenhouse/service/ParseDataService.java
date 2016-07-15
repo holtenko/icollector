@@ -1,7 +1,7 @@
 package org.igreenhouse.service;
 
-import org.igreenhouse.dao.DataIn;
-import org.igreenhouse.dao.DataOut;
+import org.igreenhouse.model.DataIn;
+import org.igreenhouse.model.DataOut;
 
 /**
  * Created by holten on 2015/11/3. 用于解析数据的类

@@ -1,7 +1,7 @@
 package org.igreenhouse.threads;
 
-import org.igreenhouse.dao.DataIn;
-import org.igreenhouse.dao.DataOut;
+import org.igreenhouse.model.DataIn;
+import org.igreenhouse.model.DataOut;
 import org.igreenhouse.service.ParseDataService;
 import org.igreenhouse.service.SaveDataService;
 

@@ -1,7 +1,7 @@
 package org.igreenhouse.service;
 
-import org.igreenhouse.dao.DataIn;
-import org.igreenhouse.dao.DataOut;
+import org.igreenhouse.model.DataIn;
+import org.igreenhouse.model.DataOut;
 import org.igreenhouse.helper.DataBaseHelper;
 
 import java.util.HashMap;

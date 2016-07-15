@@ -1,4 +1,4 @@
-package org.igreenhouse.dao;
+package org.igreenhouse.model;
 
 import java.sql.Timestamp;
 
