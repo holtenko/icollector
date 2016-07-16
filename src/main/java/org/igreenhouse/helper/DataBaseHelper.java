@@ -84,8 +84,7 @@ public class DataBaseHelper {
 	 * @param <T>
 	 * @return
 	 */
-	public static <T> boolean insertEntity(Class<T> entityClass, Map<String, Object> fieldMap) {
-		String tableName = entityClass.getSimpleName().toLowerCase();
+	public static <T> boolean insertEntity(String tableName, Map<String, Object> fieldMap) {
 		if (fieldMap.isEmpty()) {
 			logger.error("Can Not insert entity:fieldMap is empty.");
 			return false;
@@ -113,8 +112,7 @@ public class DataBaseHelper {
 	 * @param <T>
 	 * @return
 	 */
-	public static <T> boolean updateEntity(Class<T> entityClass, long id, Map<String, Object> fieldMap) {
-		String tableName = entityClass.getSimpleName().toLowerCase();
+	public static <T> boolean updateEntity(String tableName, long id, Map<String, Object> fieldMap) {
 		if (fieldMap.isEmpty()) {
 			logger.error("Can Not update entity:fieldMap is empty.");
 			return false;
@@ -141,8 +139,7 @@ public class DataBaseHelper {
 	 * @param <T>
 	 * @return
 	 */
-	public static <T> boolean deleteEntity(Class<T> entityClass, long id) {
-		String tableName = entityClass.getSimpleName().toLowerCase();
+	public static <T> boolean deleteEntity(String tableName, long id) {
 		String sql = "DELETE FROM " + tableName + " WHERE id=?";
 		return executeUpdate(sql, id) == 1;
 	}

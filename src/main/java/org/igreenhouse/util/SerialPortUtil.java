@@ -60,7 +60,6 @@ public class SerialPortUtil {
 					logger.error("Set Serial Port Parameters failure.{}", e);
 				}
 				logger.info("Open {} successfully !", portName);
-				System.out.println("Open " + portName + " successfully !");
 				return serialPort;
 			} else {
 				logger.error("This port is not a serial port");

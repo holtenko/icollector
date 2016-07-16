@@ -16,9 +16,8 @@ import java.util.concurrent.BlockingQueue;
 public class SampleDataService {
 	private final Logger logger = LoggerFactory.getLogger(SampleDataService.class);
 
-	public void sampleData(String portName,int baudRate, BlockingQueue byteQueue) {
-		SerialPort ZCPort = SerialPortUtil.openPort(portName, baudRate);
-		addListener(ZCPort, new CommListener(ZCPort, byteQueue));
+	public void sampleData(SerialPort port, BlockingQueue byteQueue) {
+		addListener(port, new CommListener(port, byteQueue));
 	}
 	/**
 	 * 添加监听器
@@ -33,8 +32,7 @@ public class SampleDataService {
 			// 设置当有数据到达时唤醒监听接收线程
 			port.notifyOnDataAvailable(true);
 			port.notifyOnBreakInterrupt(true);
-			logger.info("Add comm to {} successfully !", port.getName());
-			System.out.println("Add comm to " + port.getName() + " successfully !");
+			logger.info("Add listener to {} successfully !", port.getName());
 		} catch (TooManyListenersException e) {
 			logger.error("There are too many listeners !", e);
 		}
@@ -52,7 +50,6 @@ public class SampleDataService {
 		port.removeEventListener();
 
 		SerialPortUtil.closePort(port);
-		logger.info("Remove comm of {} successfully !", port.getName());
-		System.out.println("Remove comm of " + port.getName() + " successfully !");
+		logger.info("Remove listener of {} successfully !", port.getName());
 	}
 }
