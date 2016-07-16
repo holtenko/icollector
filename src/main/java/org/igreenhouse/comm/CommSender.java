@@ -2,6 +2,8 @@ package org.igreenhouse.comm;
 
 import gnu.io.SerialPort;
 import org.igreenhouse.util.SerialPortUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 
@@ -15,6 +17,8 @@ import static org.igreenhouse.util.ByteUtil.hexStringToBytes;
  * 发送相关数据的类
  */
 public class CommSender {
+    private final Logger logger = LoggerFactory.getLogger(CommSender.class);
+
     private SerialPortUtil serialPortUtil = new SerialPortUtil();
     private SerialPort serialPort;
     private byte[] OUTDOOR_ORDER = "#01\r".getBytes();
@@ -30,18 +34,23 @@ public class CommSender {
         byte[] cycleBytes = hexStringToBytes(cycleString);
         byte[] CycleOrder = {0x3A, 0x03, cycleBytes[0], cycleBytes[1], 0x00, 0x23};
         serialPortUtil.sendToPort(serialPort, CycleOrder);
-        System.out.println("Send setTime command successfully");
+        logger.info("Send setTime command successfully");
     }
 
     public void getOutdoorData() {
         serialPortUtil.sendToPort(serialPort, OUTDOOR_ORDER);
-        System.out.println("Send getOutdoorData command successfully at " + new Timestamp(System.currentTimeMillis()));
+        logger.info("Send getOutdoorData command successfully at {}", new Timestamp(System.currentTimeMillis()));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         serialPortUtil.sendToPort(serialPort, RAINFALL_ORDER);
-        System.out.println("Send getRainfallData command successfully at " + new Timestamp(System.currentTimeMillis()));
+        logger.info("Send getRainfallData command successfully at {}", new Timestamp(System.currentTimeMillis()));
     }
 
     public void getSolarRadiationData() {
         serialPortUtil.sendToPort(serialPort, SOLAR_RADIATION_ORDER);
-        System.out.println("Send getSolarRadiationData command successfully at " + new Timestamp(System.currentTimeMillis()));
+        logger.info("Send getSolarRadiationData command successfully at {}", new Timestamp(System.currentTimeMillis()));
     }
 }

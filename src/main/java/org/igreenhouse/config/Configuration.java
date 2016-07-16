@@ -49,6 +49,7 @@ public class Configuration {
         ZCNum = PropsUtil.getInt(conf, "zc_num");
         WeatherStationNum = PropsUtil.getInt(conf, "weather_station_num");
         SolarRadiationNum=PropsUtil.getInt(conf,"solar_radiation_num");
+
         // 数据库相关属性
         db_driver = PropsUtil.getString(dbconf, "driver");
         db_name = PropsUtil.getString(dbconf, "dbname");

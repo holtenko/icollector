@@ -66,8 +66,10 @@ public class ByteUtil {
         }
         return stringBuilder.toString().toUpperCase();
     }
+
     /**
      * Convert hex string to byte[]
+     *
      * @param hexString the hex string
      * @return byte[]
      */
@@ -85,8 +87,10 @@ public class ByteUtil {
         }
         return d;
     }
+
     /**
      * Convert char to byte
+     *
      * @param c char
      * @return byte
      */

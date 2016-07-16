@@ -7,8 +7,11 @@ import org.igreenhouse.threads.ParseAndSaveDataThread;
 import org.igreenhouse.threads.ReadDataFromQueueThread;
 import org.igreenhouse.threads.SendOutdoorOrderThread;
 import org.igreenhouse.threads.SendSolarRadiationOrderThread;
+import org.igreenhouse.threads.ShowDataThread;
 import org.igreenhouse.util.SerialPortUtil;
+import org.igreenhouse.views.MainForm;
 
+import javax.swing.JFrame;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -22,6 +25,13 @@ import static org.igreenhouse.util.SerialPortUtil.findPort;
  */
 public class MainCLI {
     public static void main(String[] args) {
+        JFrame frame = new JFrame("MainForm");
+        MainForm mainForm=new MainForm();
+        frame.setContentPane(mainForm.getPanel1());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
         ArrayList<String> portList = findPort();
         String ZCPortName = portList.get(Configuration.ZCNum);
         String WeatherStationPortName = portList.get(Configuration.WeatherStationNum);
@@ -31,11 +41,13 @@ public class MainCLI {
         SerialPort SolarRadiationPort = SerialPortUtil.openPort(SolarRadiationPortName, 9600);
 
         indoorStart(ZCPort);
-        //outdoorStart(WeatherStationPort);
-        //solarRadiationStart(SolarRadiationPort);
+        outdoorStart(WeatherStationPort);
+        solarRadiationStart(SolarRadiationPort);
+
+        new Thread(new ShowDataThread(mainForm)).start();
     }
 
-    private static void indoorStart(SerialPort port) {
+    public static void indoorStart(SerialPort port) {
         SampleDataService sampleDataService = new SampleDataService();
         BlockingQueue dataInBytes = new LinkedBlockingQueue();
         BlockingQueue dataInPackages = new LinkedBlockingQueue();
@@ -44,7 +56,7 @@ public class MainCLI {
         new Thread(new ParseAndSaveDataThread(dataInPackages, 0)).start();
     }
 
-    private static void outdoorStart(SerialPort port) {
+    public static void outdoorStart(SerialPort port) {
         SampleDataService sampleDataService = new SampleDataService();
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
         BlockingQueue dataOutBytes = new LinkedBlockingQueue();
@@ -57,7 +69,7 @@ public class MainCLI {
                 Configuration.OutdoorAcqCycle, TimeUnit.SECONDS);
     }
 
-    private static void solarRadiationStart(SerialPort port) {
+    public static void solarRadiationStart(SerialPort port) {
         SampleDataService sampleDataService = new SampleDataService();
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
         BlockingQueue dataSolarRadiationBytes = new LinkedBlockingQueue();

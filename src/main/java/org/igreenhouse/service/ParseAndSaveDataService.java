@@ -7,11 +7,15 @@ import org.igreenhouse.model.Device;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by holten on 2015/11/3. 用于解析数据的类
  */
 public class ParseAndSaveDataService {
+    public static final BlockingQueue dataShowQueue = new LinkedBlockingQueue();
+
     public static void parseIndoorPackage(Map<String, Object> dataPackageMap) {
         byte[] dataPackage = (byte[]) dataPackageMap.get("data");
         Timestamp timestamp = (Timestamp) dataPackageMap.get("timestamp");
@@ -44,6 +48,8 @@ public class ParseAndSaveDataService {
             dataMap.put("value", light);
             DataBaseHelper.insertEntity("data_light", dataMap);
         }
+
+        putDataShowQueue(serialId,"in","AT:" + airtemp + ",AH:" + airhum);
     }
 
     public static void parseOutdoorPackage(Map<String, Object> dataPackageMap) {
@@ -71,10 +77,14 @@ public class ParseAndSaveDataService {
             float atmosphere = Float.parseFloat(outdoor[4]);
             dataMap.put("value", atmosphere);
             DataBaseHelper.insertEntity("data_atmosphere", dataMap);
+
+            putDataShowQueue(deviceId, "out", "T:" + airtemp + ",H:" + airhum + "D:" + winddirect + "S:" + windspeed + "A:" + atmosphere);
         } else {
             float rainfall = Float.parseFloat(outdoor[0]);
             dataMap.put("value", rainfall);
             DataBaseHelper.insertEntity("data_rainfall", dataMap);
+
+            putDataShowQueue(deviceId, "rf",rainfall+"");
         }
     }
 
@@ -91,6 +101,20 @@ public class ParseAndSaveDataService {
         float solarRadiation = Float.parseFloat(new String(dataPackage, 1, dataPackage.length - 2));
         dataMap.put("value", solarRadiation);
         DataBaseHelper.insertEntity("data_solar_radiation", dataMap);
+
+        putDataShowQueue(deviceId,"sr",solarRadiation+"");
+    }
+
+    private static void putDataShowQueue(long id, String type, String data) {
+        try {
+            Map<String, Object> dataShowMap = new HashMap<>();
+            dataShowMap.put("id", id);
+            dataShowMap.put("type", type);
+            dataShowMap.put("data", data);
+            dataShowQueue.put(dataShowMap);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static int serialId2DeviceId(int serialId) {

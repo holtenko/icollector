@@ -79,7 +79,7 @@ public class DataBaseHelper {
 	/**
 	 * 插入实体
 	 *
-	 * @param entityClass
+	 * @param tableName
 	 * @param fieldMap
 	 * @param <T>
 	 * @return
@@ -106,7 +106,7 @@ public class DataBaseHelper {
 	/**
 	 * 更新
 	 *
-	 * @param entityClass
+	 * @param tableName
 	 * @param id
 	 * @param fieldMap
 	 * @param <T>
@@ -134,7 +134,7 @@ public class DataBaseHelper {
 	/**
 	 * 删除
 	 *
-	 * @param entityClass
+	 * @param tableName
 	 * @param id
 	 * @param <T>
 	 * @return

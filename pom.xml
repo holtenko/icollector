@@ -8,7 +8,7 @@
     <groupId>org.igreenhouse</groupId>
     <artifactId>icollector</artifactId>
     <packaging>jar</packaging>
-    <version>2.0</version>
+    <version>3.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,7 +69,6 @@
 
 
     <build>
-
         <finalName>icollector</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
@@ -110,7 +109,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.igreenhouse.main.Main</mainClass>
+                            <mainClass>org.igreenhouse.main.MainCLI</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

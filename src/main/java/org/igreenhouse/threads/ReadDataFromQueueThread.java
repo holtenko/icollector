@@ -1,11 +1,12 @@
 package org.igreenhouse.threads;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -13,6 +14,7 @@ import java.util.concurrent.BlockingQueue;
  */
 
 public class ReadDataFromQueueThread implements Runnable {
+    private final Logger logger = LoggerFactory.getLogger(ReadDataFromQueueThread.class);
     private BlockingQueue byteQueue;// 存储字节流队列
     private BlockingQueue dataQueue;// 存储数据包字符串
     private byte start;// 数据包头
@@ -27,6 +29,7 @@ public class ReadDataFromQueueThread implements Runnable {
 
     @Override
     public void run() {
+        logger.info("ReadDataFromQueueThread Run...");
         byte[] bytes = new byte[128];
         int index = 0;
         boolean valid = false;
