@@ -10,8 +10,10 @@ import org.igreenhouse.threads.SendSolarRadiationOrderThread;
 import org.igreenhouse.threads.ShowDataThread;
 import org.igreenhouse.util.SerialPortUtil;
 import org.igreenhouse.views.MainForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -24,25 +26,34 @@ import static org.igreenhouse.util.SerialPortUtil.findPort;
  * Created by holten.gao on 2016/7/13.
  */
 public class MainCLI {
+    private static final Logger logger = LoggerFactory.getLogger(MainCLI.class);
+
     public static void main(String[] args) {
-        JFrame frame = new JFrame("MainForm");
-        MainForm mainForm=new MainForm();
-        frame.setContentPane(mainForm.getPanel1());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        JFrame jFrame = new JFrame("iCollector Version 3.0");
+        MainForm mainForm = new MainForm();
+        JPanel rootPane = mainForm.getMainPanel();
+        jFrame.setContentPane(rootPane);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.pack();
+        jFrame.setSize(800, 600);
+        jFrame.setLocationRelativeTo(rootPane);//居中
+        jFrame.setVisible(true);
 
         ArrayList<String> portList = findPort();
+        if (portList.size() < 1) {
+            logger.error("There is no Serial Port...");
+            return;
+        }
         String ZCPortName = portList.get(Configuration.ZCNum);
-        String WeatherStationPortName = portList.get(Configuration.WeatherStationNum);
-        String SolarRadiationPortName = portList.get(Configuration.SolarRadiationNum);
+        //String WeatherStationPortName = portList.get(Configuration.WeatherStationNum);
+        //String SolarRadiationPortName = portList.get(Configuration.SolarRadiationNum);
         SerialPort ZCPort = SerialPortUtil.openPort(ZCPortName, 115200);
-        SerialPort WeatherStationPort = SerialPortUtil.openPort(WeatherStationPortName, 9600);
-        SerialPort SolarRadiationPort = SerialPortUtil.openPort(SolarRadiationPortName, 9600);
+        //SerialPort WeatherStationPort = SerialPortUtil.openPort(WeatherStationPortName, 9600);
+       // SerialPort SolarRadiationPort = SerialPortUtil.openPort(SolarRadiationPortName, 9600);
 
         indoorStart(ZCPort);
-        outdoorStart(WeatherStationPort);
-        solarRadiationStart(SolarRadiationPort);
+        //outdoorStart(WeatherStationPort);
+        //solarRadiationStart(SolarRadiationPort);
 
         new Thread(new ShowDataThread(mainForm)).start();
     }

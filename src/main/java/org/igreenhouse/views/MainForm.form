@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.igreenhouse.views.MainForm">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="20" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="21" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="1755" height="609"/>
+      <xy x="20" y="20" width="1755" height="634"/>
     </constraints>
     <properties>
       <inheritsPopupMenu value="false"/>
@@ -813,73 +813,6 @@
           <text value="End"/>
         </properties>
       </component>
-      <component id="e9204" class="javax.swing.JTextField" binding="OutValue">
-        <constraints>
-          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <font/>
-          <horizontalAlignment value="11"/>
-          <inheritsPopupMenu value="false"/>
-          <name value="OutValue"/>
-          <text value="0"/>
-        </properties>
-      </component>
-      <component id="77e4f" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="19" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <inheritsPopupMenu value="false"/>
-          <text value="OUT"/>
-        </properties>
-      </component>
-      <component id="66b2a" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="19" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <inheritsPopupMenu value="false"/>
-          <text value="SR"/>
-        </properties>
-      </component>
-      <component id="2839d" class="javax.swing.JTextField" binding="SolarValue">
-        <constraints>
-          <grid row="19" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <horizontalAlignment value="11"/>
-          <inheritsPopupMenu value="false"/>
-          <name value="SolarValue"/>
-          <text value="0"/>
-        </properties>
-      </component>
-      <component id="f186a" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="19" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <inheritsPopupMenu value="false"/>
-          <text value="RF"/>
-        </properties>
-      </component>
-      <component id="b3320" class="javax.swing.JTextField" binding="RainfallValue">
-        <constraints>
-          <grid row="19" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <horizontalAlignment value="11"/>
-          <inheritsPopupMenu value="false"/>
-          <name value="RainfallValue"/>
-          <text value="0"/>
-        </properties>
-      </component>
       <component id="3b3a7" class="javax.swing.JTextField" binding="RouteCount1">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
@@ -1091,20 +1024,6 @@
           <text value="0"/>
         </properties>
       </component>
-      <component id="f80d7" class="javax.swing.JTextField" binding="OutCount">
-        <constraints>
-          <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-11926260"/>
-          <horizontalAlignment value="11"/>
-          <inheritsPopupMenu value="false"/>
-          <name value="OutCount"/>
-          <text value="0"/>
-        </properties>
-      </component>
       <component id="ef32a" class="javax.swing.JTextField" binding="EndCount2">
         <constraints>
           <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -1189,20 +1108,6 @@
           <text value="0"/>
         </properties>
       </component>
-      <component id="785da" class="javax.swing.JTextField" binding="SolarCount">
-        <constraints>
-          <grid row="18" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-11926260"/>
-          <horizontalAlignment value="11"/>
-          <inheritsPopupMenu value="false"/>
-          <name value="SolarCount"/>
-          <text value="0"/>
-        </properties>
-      </component>
       <component id="5cc1c" class="javax.swing.JTextField" binding="EndCount3">
         <constraints>
           <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -1284,20 +1189,6 @@
           <horizontalAlignment value="11"/>
           <inheritsPopupMenu value="false"/>
           <name value="EndCount37"/>
-          <text value="0"/>
-        </properties>
-      </component>
-      <component id="34ea4" class="javax.swing.JTextField" binding="RainfallCount">
-        <constraints>
-          <grid row="18" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-11926260"/>
-          <horizontalAlignment value="11"/>
-          <inheritsPopupMenu value="false"/>
-          <name value="RainfallCount"/>
           <text value="0"/>
         </properties>
       </component>
@@ -1467,6 +1358,124 @@
           <inheritsPopupMenu value="false"/>
           <name value="EndCount39"/>
           <text value="0"/>
+        </properties>
+      </component>
+      <component id="36e70" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="18" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <inheritsPopupMenu value="false"/>
+          <text value="Out"/>
+        </properties>
+      </component>
+      <component id="34ea4" class="javax.swing.JTextField" binding="RainfallCount">
+        <constraints>
+          <grid row="19" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-11926260"/>
+          <horizontalAlignment value="11"/>
+          <inheritsPopupMenu value="false"/>
+          <name value="RainfallCount"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="b3320" class="javax.swing.JTextField" binding="RainfallValue">
+        <constraints>
+          <grid row="20" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="11"/>
+          <inheritsPopupMenu value="false"/>
+          <name value="RainfallValue"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="f186a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="20" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <inheritsPopupMenu value="false"/>
+          <text value="RF"/>
+        </properties>
+      </component>
+      <component id="785da" class="javax.swing.JTextField" binding="SolarCount">
+        <constraints>
+          <grid row="19" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-11926260"/>
+          <horizontalAlignment value="11"/>
+          <inheritsPopupMenu value="false"/>
+          <name value="SolarCount"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="2839d" class="javax.swing.JTextField" binding="SolarValue">
+        <constraints>
+          <grid row="20" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="11"/>
+          <inheritsPopupMenu value="false"/>
+          <name value="SolarValue"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="66b2a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="20" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <inheritsPopupMenu value="false"/>
+          <text value="SR"/>
+        </properties>
+      </component>
+      <component id="f80d7" class="javax.swing.JTextField" binding="OutCount">
+        <constraints>
+          <grid row="19" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-11926260"/>
+          <horizontalAlignment value="11"/>
+          <inheritsPopupMenu value="false"/>
+          <name value="OutCount"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="e9204" class="javax.swing.JTextField" binding="OutValue">
+        <constraints>
+          <grid row="20" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font/>
+          <horizontalAlignment value="11"/>
+          <inheritsPopupMenu value="false"/>
+          <name value="OutValue"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="77e4f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="20" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <inheritsPopupMenu value="false"/>
+          <text value="OUT"/>
         </properties>
       </component>
     </children>

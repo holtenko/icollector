@@ -92,7 +92,7 @@ public class ParseAndSaveDataService {
     public static void parseSolarRadiationPackage(Map<String, Object> dataPackageMap) {
         byte[] dataPackage = (byte[]) dataPackageMap.get("data");
         Timestamp timestamp = (Timestamp) dataPackageMap.get("timestamp");
-        long deviceId = Configuration.WeatherStationID;
+        long deviceId = Configuration.SolarRadiationID;
 
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("deviceid", deviceId);

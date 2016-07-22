@@ -15,6 +15,7 @@ public class Configuration {
     private static final Properties dbconf = PropsUtil.loadProps("dbconfig.properties");
 
     public static final int WeatherStationID;
+    public static final int SolarRadiationID;
     public static final int OutdoorAcqDelay;
     public static final int OutdoorAcqCycle;
     public static final int SolarRadiationAcqDelay;
@@ -41,6 +42,7 @@ public class Configuration {
     static {
         // 获取设备配置参数
         WeatherStationID = PropsUtil.getInt(conf, "weather_station_ID");
+        SolarRadiationID= PropsUtil.getInt(conf, "solar_radiation_ID");
         OutdoorAcqDelay = PropsUtil.getInt(conf, "outdoor_acq_delay");
         OutdoorAcqCycle = PropsUtil.getInt(conf, "outdoor_acq_cycle");
         SolarRadiationAcqDelay = PropsUtil.getInt(conf, "solar_radiation_acq_delay");

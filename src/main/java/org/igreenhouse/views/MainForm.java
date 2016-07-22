@@ -1,8 +1,8 @@
 package org.igreenhouse.views;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import org.igreenhouse.threads.ShowDataThread;
+
+import javax.swing.*;
 
 import java.awt.Component;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Created by holten on 2016/7/12.
  */
 public class MainForm {
-    private JPanel panel1;
+    private JPanel MainPanel;
     private JTextField RouteCount1;
     private JTextField RouteCount2;
     private JTextField RouteCount3;
@@ -98,30 +98,24 @@ public class MainForm {
     private JTextField SolarValue;
     private JTextField RainfallCount;
     private JTextField RainfallValue;
-    private HashMap<String, JTextField> deviceMap;
+    private static HashMap<String, JTextField> deviceMap;
 
     public MainForm() {
         deviceMap = new HashMap();
-        getComponents(panel1, deviceMap);
-        System.out.println(deviceMap.size());
+        Component[] components = MainPanel.getComponents();
+        for (Component com : components) {
+            if (com.getClass() == JTextField.class) {
+                JTextField jtf = (JTextField) com;
+                deviceMap.put(jtf.getName(), jtf);
+            }
+        }
     }
 
-    public JPanel getPanel1() {
-        return panel1;
+    public JPanel getMainPanel() {
+        return MainPanel;
     }
 
     public HashMap<String, JTextField> getDeviceMap() {
         return deviceMap;
-    }
-
-    private void getComponents(JPanel panel, HashMap map) {
-        Component[] components = panel.getComponents();
-        for (Component com : components) {
-            if (com.getClass() == JTextField.class) {
-                JTextField jtf = (JTextField) com;
-                map.put(jtf.getName(), jtf);
-            }
-        }
-
     }
 }
