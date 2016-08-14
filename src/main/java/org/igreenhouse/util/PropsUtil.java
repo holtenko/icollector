@@ -3,11 +3,15 @@ package org.igreenhouse.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Created by allenko on 15-10-29.
+ * Created by holten.gao on 2016/7/13.
  */
 public class PropsUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
@@ -22,9 +26,9 @@ public class PropsUtil {
         Properties props = null;
         InputStream inputStream = null;
         try {
-            String filepath=PropsUtil.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-            filepath=filepath.substring(0,filepath.lastIndexOf("/")+1);
-            File propfile=new File(filepath+filename);
+            String filepath = PropsUtil.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            filepath = filepath.substring(0, filepath.lastIndexOf("/") + 1);
+            File propfile = new File(filepath + filename);
             inputStream = new FileInputStream(propfile);
             if (inputStream == null) {
                 throw new FileNotFoundException(filename + " is not found");
@@ -32,13 +36,13 @@ public class PropsUtil {
             props = new Properties();
             props.load(inputStream);
         } catch (IOException e) {
-            LOGGER.error("load DataBase Properties file failure", e);
+            LOGGER.error("load DataBase Properties file failure{}", e);
         } finally {
             if (inputStream != null) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    LOGGER.error("close InputStream failure", e);
+                    LOGGER.error("close InputStream failure{}", e);
                 }
             }
         }
@@ -83,10 +87,11 @@ public class PropsUtil {
     public static int getInt(Properties props, String key, int defaultvalue) {
         int value = defaultvalue;
         if (props.containsKey(key)) {
-            value =Integer.parseInt(props.getProperty(key));
+            value = Integer.parseInt(props.getProperty(key));
         }
         return value;
     }
+
     /**
      * 获取字符串属性（默认为空）
      *
@@ -97,5 +102,4 @@ public class PropsUtil {
     public static int getInt(Properties props, String key) {
         return getInt(props, key, 0);
     }
-
 }

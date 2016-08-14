@@ -4,10 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
     <groupId>org.igreenhouse</groupId>
     <artifactId>icollector</artifactId>
     <packaging>jar</packaging>
-    <version>1.5</version>
+    <version>3.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -59,16 +60,15 @@
 
         <!-- RXTXcomm-->
         <dependency>
-            <groupId>org.qbang</groupId>
-            <artifactId>RXTXcomm</artifactId>
-            <version>2.2pre</version>
+            <groupId>org.bidib.jbidib.org.qbang.rxtx</groupId>
+            <artifactId>rxtxcomm</artifactId>
+            <version>2.2</version>
         </dependency>
 
     </dependencies>
 
 
     <build>
-
         <finalName>icollector</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
@@ -109,13 +109,11 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.igreenhouse.main.Main</mainClass>
+                            <mainClass>org.igreenhouse.main.MainCLI</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
 </project>

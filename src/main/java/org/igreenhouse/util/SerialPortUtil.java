@@ -1,27 +1,20 @@
 package org.igreenhouse.util;
 
-import gnu.io.CommPort;
-import gnu.io.CommPortIdentifier;
-import gnu.io.SerialPort;
-import gnu.io.UnsupportedCommOperationException;
-import gnu.io.NoSuchPortException;
-import gnu.io.PortInUseException;
+import gnu.io.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
 /**
- * Created by allenko on 15-10-29.
- * 操作串口相关的类
+ * Created by holten on 15-10-29. 操作串口相关的类
  */
 public class SerialPortUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SerialPortUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(SerialPortUtil.class);
 
     /**
      * 查找所有可用端口
@@ -29,13 +22,15 @@ public class SerialPortUtil {
      * @return 所有端口列表
      */
     public static final ArrayList<String> findPort() {
-        @SuppressWarnings("unchecked")
-        Enumeration<CommPortIdentifier> portList = CommPortIdentifier.getPortIdentifiers();//获得所有串口
+        Enumeration portList = CommPortIdentifier.getPortIdentifiers();// 获得所有串口
         ArrayList<String> portNameList = new ArrayList<>();
-        //串口名字添加到List并返回
         while (portList.hasMoreElements()) {
-            String portName = portList.nextElement().getName();
-            portNameList.add(portName);
+            CommPortIdentifier com = (CommPortIdentifier) portList.nextElement();
+            switch (com.getPortType()) {
+                case CommPortIdentifier.PORT_SERIAL:
+                    String portName = com.getName();
+                    portNameList.add(portName);
+            }
         }
         return portNameList;
     }
@@ -44,32 +39,33 @@ public class SerialPortUtil {
      * 打开串口
      *
      * @param portName 端口名称
-     * @param baudrate 波特率
+     * @param baudRate 波特率
      * @return 串口对象
      */
-    public static final SerialPort openPort(String portName, int baudrate) {
+    public static final SerialPort openPort(String portName, int baudRate) {
         try {
-            //通过端口名识别端口
+            // 通过端口名识别端口
             CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
-            //打开端口，并给端口名字和一个timeout
+            // 打开端口，并给端口名字和一个timeout
             CommPort commPort = portIdentifier.open(portName, 2000);
-            //判断是不是串口
+            // 判断是不是串口
             if (commPort instanceof SerialPort) {
                 SerialPort serialPort = (SerialPort) commPort;
                 try {
-                    //设置一下串口的波特率等参数
-                    serialPort.setSerialPortParams(baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                    // 设置一下串口的波特率等参数
+                    serialPort.setSerialPortParams(baudRate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
+                            SerialPort.PARITY_NONE);
                 } catch (UnsupportedCommOperationException e) {
-                    LOGGER.error("Set Serialport Parameters failure", e);
+                    logger.error("Set Serial Port Parameters failure.{}", e);
                 }
-                System.out.println("Open " + portName + " sucessfully !");
+                logger.info("Open {} successfully !", portName);
                 return serialPort;
             } else {
-                LOGGER.error("This port is not a serialport");
+                logger.error("This port is not a serial port");
                 return null;
             }
         } catch (NoSuchPortException | PortInUseException e) {
-            LOGGER.error("There is no " + portName + "or it's occupied!", e);
+            logger.error("There is no {} or it's occupied!{}", portName, e);
             return null;
         }
     }
@@ -80,9 +76,10 @@ public class SerialPortUtil {
      * @param serialPort 串口对象
      */
     public static final void closePort(SerialPort serialPort) {
-        String portname = serialPort.getName();
+        String portName = serialPort.getName();
         serialPort.close();
-        System.out.println("Close " + portname + " sucessfully !");
+        logger.info("Close {} successfully !", portName);
+        System.out.println("Close " + portName + " sucessfully !");
     }
 
     /**
@@ -98,30 +95,7 @@ public class SerialPortUtil {
             out.flush();
             out.close();
         } catch (IOException e) {
-            LOGGER.error("Send to SerialPort failure", e);
+            logger.error("Send to SerialPort failure", e);
         }
-    }
-
-    /**
-     * 读取数据
-     *
-     * @return 字节ArrayList
-     */
-    public byte[] readFromPort(InputStream inStream) {
-        byte[] bytes = null;
-        try {
-            while (true) {
-                //获取buffer里的数据长度
-                int bufflenth = inStream.available();
-                if (0 == bufflenth) {
-                    break;
-                }
-                bytes = new byte[bufflenth];
-                inStream.read(bytes);
-            }
-        } catch (IOException e) {
-            LOGGER.error("Read Data Failure", e);
-        }
-        return bytes;
     }
 }
