@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `t_airhumidity`;
 CREATE TABLE `t_airhumidity` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS `t_airtemp`;
 CREATE TABLE `t_airtemp` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `t_atmosphere`;
 CREATE TABLE `t_atmosphere` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `t_light`;
 CREATE TABLE `t_light` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -67,7 +67,7 @@ DROP TABLE IF EXISTS `t_rainfall`;
 CREATE TABLE `t_rainfall` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -83,7 +83,7 @@ DROP TABLE IF EXISTS `t_soilhumidity`;
 CREATE TABLE `t_soilhumidity` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -99,7 +99,7 @@ DROP TABLE IF EXISTS `t_soiltemp`;
 CREATE TABLE `t_soiltemp` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -115,7 +115,7 @@ DROP TABLE IF EXISTS `t_solar`;
 CREATE TABLE `t_solar` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `t_winddirect`;
 CREATE TABLE `t_winddirect` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),
@@ -147,7 +147,7 @@ DROP TABLE IF EXISTS `t_windspeed`;
 CREATE TABLE `t_windspeed` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   `deviceid` int(11) unsigned NOT NULL COMMENT '设备ID',
-  `sampletime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
+  `sampletime` sampletime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间戳',
   `value` decimal(10,2) NOT NULL COMMENT '记录值',
   PRIMARY KEY (`id`),
   KEY `deviceid` (`deviceid`),

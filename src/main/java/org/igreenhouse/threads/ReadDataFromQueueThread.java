@@ -16,7 +16,7 @@ import java.util.concurrent.BlockingQueue;
 public class ReadDataFromQueueThread implements Runnable {
     private final Logger logger = LoggerFactory.getLogger(ReadDataFromQueueThread.class);
     private BlockingQueue byteQueue;// 存储字节流队列
-    private BlockingQueue dataQueue;// 存储数据包字符串
+    private BlockingQueue dataQueue;// 存储数据包队列
     private byte start;// 数据包头
     private byte end;// 数据包尾
 
@@ -44,7 +44,7 @@ public class ReadDataFromQueueThread implements Runnable {
                     valid = false;
                     Map<String,Object> dataMap=new HashMap<>();
                     byte[] dataPackage = Arrays.copyOf(bytes, index);
-                    dataMap.put("time",new Timestamp(System.currentTimeMillis()));
+                    dataMap.put("sampletime",new Timestamp(System.currentTimeMillis()));
                     dataMap.put("data",dataPackage);
                     dataQueue.put(dataMap);
                     index = 0;// 重置索引

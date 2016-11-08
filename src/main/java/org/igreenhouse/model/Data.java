@@ -7,15 +7,15 @@ import java.sql.Timestamp;
  */
 public class Data {
     private long deviceid;
-    private Timestamp timestamp;
+    private Timestamp sampletime;
     private float value;
 
     public Data() {
     }
 
-    public Data(long deviceid, Timestamp timestamp, float value) {
+    public Data(long deviceid, Timestamp sampletime, float value) {
         this.deviceid = deviceid;
-        this.timestamp = timestamp;
+        this.sampletime = sampletime;
         this.value = value;
     }
 
@@ -27,12 +27,12 @@ public class Data {
         this.deviceid = deviceid;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Timestamp getSampletime() {
+        return sampletime;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setSampletime(Timestamp sampletime) {
+        this.sampletime = sampletime;
     }
 
     public float getValue() {
